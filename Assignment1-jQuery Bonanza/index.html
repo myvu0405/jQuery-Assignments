@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+    <title>jQuery-a jQuery Bonanza</title>
+</head>
+<body>
+    <header><h1>Assigment1 - a jQuery Bonanza</h1></header>
+
+    <div id='container'>
+        <div id="fadeOutBox" class="boxes">
+            <button id="fadeOutBtn">Fade Out</button>
+            <button id='fadeInBtn'>Fade In</button>
+            <button id='hideBtn'>Hide Text</button>
+            <button id='showBtn'>Show Text</button>
+            <button id="slideDownBtn">Slide Down</button>
+            <p id="fadingTxt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab a, eaque alias nobis nam ipsam fugiat modi nemo, harum fugit similique corrupti? Maiores excepturi deserunt nisi eveniet ducimus veniam reiciendis.</p>
+            <p id="slideTxt" style="display:none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur velit eaque exercitationem cumque beatae reiciendis molestias a reprehenderit. Magnam possimus nostrum velit voluptas saepe rerum ipsum adipisci asperiores dolore illum!</p>
+        </div>
+
+        <div id="appendBox" class="boxes">
+            <button id="appendBtn">Append</button>
+            <p id="appendTxt">Click Append button to append some text.</p>
+        </div>
+
+        <div id="changeColorBox" class="boxes">
+            <button id="changeColorBtn">Change Color</button>
+            <p id="changeColorTxt">Click Change Color button to change color of this text.</p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#fadeOutBtn').click(function(){
+                $('#fadingTxt').fadeOut(3000);
+            })
+
+            $('#fadeInBtn').click(function(){
+                $('#fadingTxt').fadeIn(3000);
+            })
+
+            $('#hideBtn').click(function(){
+                $('#fadingTxt').hide();
+            })
+
+            $('#showBtn').click(function(){
+                $('#fadingTxt').show();
+            })
+
+            $('#slideDownBtn').click(function(){
+                $('#slideTxt').slideDown();
+            })
+
+            $('#appendBtn').click(function(){
+                $('#appendTxt').append(' New test has been appended!');
+            })
+
+            $('#changeColorBtn').click(function(){
+                $('#changeColorTxt').css('color', 'red');
+                $('#changeColorTxt').addClass('txtStyle');
+            })
+        })
+    </script>
+</body>
+</html>
