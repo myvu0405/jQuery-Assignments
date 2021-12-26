@@ -11,14 +11,22 @@
     <title>jQuery-from Turing to Gates</title>
 </head>
 <body>
-    <header><h1>Assigment2 - from Turing to Gates</h1></header>
+    <header><h1>Assignment2 - from Turing to Gates</h1></header>
 
     <div id='container'>
         <img src="./images/alan.jpg" alt="Alan Turing and Bill Gates" alt-pic='./images/Gates.jpg'>
     </div>
 
     <script>
-
+        $(document).ready(function(){
+            $('img').click(function(e){
+                e.preventDefault();
+                $('img').fadeOut();
+                $('img').attr('src',$('img').attr('alt-pic'));
+                
+                $('img').slideDown();
+            })
+        })
     </script>
 </body>
 </html>
