@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+    <title>jQuery-A Countdown Timer</title>
+</head>
+<body>
+    <header><h1>Assignment3 - a Countdown Timer</h1></header>
+
+    <div id='container'>
+        <div id='timerSetup'>
+            <label>Timer setup:</label>
+            <input type="number" id='hrNo' class="timeInput" value="01" min="00" disabled>
+            <label >:</label>
+            <input type="number" id='minNo' class="timeInput" min='00' max="59" value="01" disabled>
+            <label>:</label>
+            <input type="number" id="secNo" class="timeInput" value='00' min='00' max="59" disabled>
+            <button id='editBtn'>Edit</button>
+        </div>
+        <div id='timerCountdown'>
+            <div id='hrs' class="timerDisplay">00</div>
+            <div class="colon timerDisplay">:</div>
+            <div id='mins' class="timerDisplay">00</div>
+            <div class="colon timerDisplay">:</div>
+            <div id='secs' class="timerDisplay">00</div>
+            <div id='buttons'>
+                <button id='startBtn' class="timerBtn">Start</button>
+                <button id='resetBtn' class="timerBtn">Reset</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            let hrs;
+            
+            let mins;
+            
+            let secs;
+            let myInterval;
+
+            function stopTimer() {
+                clearInterval(myInterval);
+                myInterval=undefined;
+            }
+
+            $('#startBtn').click(function(){
+
+                hrs=parseInt($('#hrNo').val());
+                
+                mins=parseInt($('#minNo').val());
+                
+                secs=parseInt($('#secNo').val());
+
+                $('#hrs').text(hrs);
+                $('#mins').text(mins);
+                $('#secs').text(secs);
+                
+                myInterval=setInterval(myTimer,1000);
+
+                function myTimer(){
+                    let currentHr=parseInt($('#hrs').text());
+                    let currentMin=parseInt($('#mins').text());
+                    let currentSec=parseInt($('#secs').text());
+
+                    if (currentHr===0 && currentMin===0 && currentSec===0){
+                        stopTimer();
+                    }
+                    else if (currentSec>0){
+                        currentSec--;
+                        $('#secs').text(currentSec);
+                    }
+                    else if(currentSec ==0 && currentMin >0){
+                        currentMin--;
+                        currentSec=59;
+                        $('#secs').text(currentSec);
+                        $('#mins').text(currentMin);
+                    }
+                    else if (currentHr>0 && currentMin===0 && currentSec===0) {
+                        currentMin=59;
+                        currentSec=59
+                        currentHr--;
+                        $('#secs').text(currentSec);
+                        $('#mins').text(currentMin);
+                        $('#hrs').text(currentHr);
+                    }
+                }
+
+            })
+
+            $('#resetBtn').click(function(){
+                stopTimer();
+                $('#secs').text('00');
+                $('#mins').text('00');
+                $('#hrs').text('00');
+            })
+
+            $('#editBtn').click(function(){
+                if(myInterval) {
+                    stopTimer();
+                }
+                $('.timeInput').attr('disabled', false);
+                $('.timeInput').change(function(){
+                    if (parseInt($(this).val())<10){
+                        
+                        $(this).val('0'+ $(this).val());
+                        
+                    }
+                })
+                $('.timeInput').blur(function(){
+                    $(this).attr('disabled', true);
+                })
+                
+            })
+    
+        })
+    </script>
+</body>
+</html>
