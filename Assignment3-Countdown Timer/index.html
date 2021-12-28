@@ -16,9 +16,9 @@
     <div id='container'>
         <div id='timerSetup'>
             <label>Timer setup:</label>
-            <input type="number" id='hrNo' class="timeInput" value="01" min="00" disabled>
+            <input type="number" id='hrNo' class="timeInput" value="00" min="00" disabled>
             <label >:</label>
-            <input type="number" id='minNo' class="timeInput" min='00' max="59" value="01" disabled>
+            <input type="number" id='minNo' class="timeInput" min='00' max="59" value="25" disabled>
             <label>:</label>
             <input type="number" id="secNo" class="timeInput" value='00' min='00' max="59" disabled>
             <button id='editBtn'>Edit</button>
@@ -53,15 +53,19 @@
 
             $('#startBtn').click(function(){
 
+                $('.timeInput').attr('disabled', true);
+                $('#startBtn').attr('disabled', true);
+                
+
                 hrs=parseInt($('#hrNo').val());
                 
                 mins=parseInt($('#minNo').val());
                 
                 secs=parseInt($('#secNo').val());
 
-                $('#hrs').text(hrs);
-                $('#mins').text(mins);
-                $('#secs').text(secs);
+                $('#hrs').text(hrs<10? `0${hrs}`:hrs);
+                $('#mins').text(mins<10? `0${mins}`:mins);
+                $('#secs').text(secs<10? `0${secs}`:secs);
                 
                 myInterval=setInterval(myTimer,1000);
 
@@ -75,13 +79,20 @@
                     }
                     else if (currentSec>0){
                         currentSec--;
-                        $('#secs').text(currentSec);
+                        if (currentSec<10) {//format display number in form of two digits
+
+                            $('#secs').text(`0${currentSec}`);
+                        }
+                        else $('#secs').text(currentSec);
                     }
                     else if(currentSec ==0 && currentMin >0){
                         currentMin--;
                         currentSec=59;
                         $('#secs').text(currentSec);
-                        $('#mins').text(currentMin);
+                        if (currentMin<10) {
+                            $('#mins').text(`0${currentMin}`);
+                        }
+                        else $('#mins').text(currentMin);
                     }
                     else if (currentHr>0 && currentMin===0 && currentSec===0) {
                         currentMin=59;
@@ -89,7 +100,10 @@
                         currentHr--;
                         $('#secs').text(currentSec);
                         $('#mins').text(currentMin);
-                        $('#hrs').text(currentHr);
+                        if (currentHr <10) {
+                            $('#hrs').text(`0${currentHr}`);
+                        }
+                        else $('#hrs').text(currentHr);
                     }
                 }
 
@@ -100,17 +114,20 @@
                 $('#secs').text('00');
                 $('#mins').text('00');
                 $('#hrs').text('00');
+                $('#startBtn').attr('disabled', false);
             })
 
             $('#editBtn').click(function(){
                 if(myInterval) {
                     stopTimer();
+                    $('#startBtn').attr('disabled', false);
                 }
                 $('.timeInput').attr('disabled', false);
                 $('.timeInput').change(function(){
-                    if (parseInt($(this).val())<10){
+                    let currVal=parseInt($(this).val());
+                    if (currVal<10){//format numbers in form of two digits
                         
-                        $(this).val('0'+ $(this).val());
+                        $(this).val(`0${currVal}`);
                         
                     }
                 })
