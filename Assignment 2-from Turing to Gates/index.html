@@ -14,17 +14,18 @@
     <header><h1>Assignment2 - from Turing to Gates</h1></header>
 
     <div id='container'>
-        <img src="./images/alan.jpg" alt="Alan Turing and Bill Gates" alt-pic='./images/Gates.jpg'>
+        <img src="./images/1a.jpg" alt="Alan Turing and Bill Gates" alt-pic='./images/1b.jpg'>
+        <img src="./images/2a.jpg" alt="Alan Turing and Bill Gates" alt-pic='./images/2b.jpg'>
+        <img src="./images/3a.jpg" alt="Alan Turing and Bill Gates" alt-pic='./images/3b.jpg'>
     </div>
 
     <script>
         $(document).ready(function(){
             $('img').click(function(e){
                 e.preventDefault();
-                $('img').fadeOut();
-                $('img').attr('src',$('img').attr('alt-pic'));
                 
-                $('img').slideDown();
+                $(this).attr('src',$(this).attr('alt-pic'));                
+                
             })
         })
     </script>
